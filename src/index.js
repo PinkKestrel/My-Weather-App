@@ -19,6 +19,17 @@ function displayDay(today) {
   }
   let dayLine = document.querySelector("#current-day");
   dayLine.innerHTML = `${currentDay}, ${currentHour}:${currentMinutes}`;
+
+  let dayOne = document.querySelector("#day1");
+  dayOne.innerHTML = days[(today.getDay() + 1) % days.length];
+  let dayTwo = document.querySelector("#day2");
+  dayTwo.innerHTML = days[(today.getDay() + 2) % days.length];
+  let dayThree = document.querySelector("#day3");
+  dayThree.innerHTML = days[(today.getDay() + 3) % days.length];
+  let dayFour = document.querySelector("#day4");
+  dayFour.innerHTML = days[(today.getDay() + 4) % days.length];
+  let dayFive = document.querySelector("#day5");
+  dayFive.innerHTML = days[(today.getDay() + 5) % days.length];
 }
 
 displayDay(new Date());
