@@ -35,7 +35,6 @@ function displayDay(today) {
 displayDay(new Date());
 
 function displayTemperature(response) {
-  console.log(response.data);
   let city = response.data.name;
   let weather = response.data.weather[0].main;
   let temperature = Math.round(response.data.main.temp);
@@ -54,91 +53,21 @@ function displayTemperature(response) {
   currentHumidityElement.innerHTML = `Humidity: ${humidity}%`;
   windSpeedElement.innerHTML = `Wind speed: ${windSpeed} km/h`;
 }
-function getCityWeather(event) {
+function searchCityWeather(event) {
   event.preventDefault();
   let cityInput = document.querySelector("#enter-city");
   let searchCity = cityInput.value;
+  getCityWeather(searchCity);
+}
+
+function getCityWeather(city) {
   let apiKey = "3dce9b1c66837262a25b3f448d354a76";
   let units = "metric";
-  let localWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${apiKey}&units=${units}`;
+  let localWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
 
   axios.get(localWeatherUrl).then(displayTemperature);
 }
 
 let cityForm = document.querySelector("#city-form");
-cityForm.addEventListener("submit", getCityWeather);
-
-/*function displayCity(event) {
-  event.preventDefault();
-  let cityLine = document.querySelector("#current-city");
-  let userCity = document.querySelector("#enter-city");
-  cityLine.innerHTML = userCity.value;
-}
-
-let cityForm = document.querySelector("#city-form");
-cityForm.addEventListener("submit", displayCity);
-
-let celsiusLink = document.querySelector("#to-celsius");
-let fahrenheitLink = document.querySelector("#to-fahrenheit");
-celsiusLink.addEventListener("click", displayCelsius);
-fahrenheitLink.addEventListener("click", displayFahrenheit);
-
-function displayCelsius(event) {
-  event.preventDefault();
-  let currentTemp = document.querySelector("#current-temp");
-  currentTemp.innerHTML = "16";
-}
-function displayFahrenheit(event) {
-  event.preventDefault();
-  let currentTemp = document.querySelector("#current-temp");
-  currentTemp.innerHTML = "61";
-}
-/*function celsiusToFahrenheit(celsius) {
-  return Math.round((celsius * 9) / 5 + 32);
-}
-
-/*Homework Week 3:
-let weather = {
-  paris: {
-    temp: 19.7,
-    humidity: 80
-  },
-  tokyo: {
-    temp: 17.3,
-    humidity: 50
-  },
-  lisbon: {
-    temp: 30.2,
-    humidity: 20
-  },
-  "san francisco": {
-    temp: 20.9,
-    humidity: 100
-  },
-  oslo: {
-    temp: -5,
-    humidity: 20
-  }
-};
-
-let userCityName = prompt("Enter a city");
-let cityKey = userCityName.trim().toLowerCase();
-let cityWeather = weather[cityKey];
-
-function celsiusToFahrenheit(celsius) {
-  return Math.round((celsius * 9) / 5 + 32);
-}
-
-if (cityWeather !== undefined) {
-  let tempCelsius = Math.round(cityWeather.temp);
-  alert(
-    `It is currently ${tempCelsius}°C (${celsiusToFahrenheit(
-      tempCelsius
-    )}°F) in ${userCityName.trim()} with a humidity of ${cityWeather.humidity}%`
-  );
-} else {
-  alert(
-    `Sorry, we don't know the weather for this city, try going to https://www.google.com/search?q=weather+${cityKey}`
-  );
-}
-*/
+cityForm.addEventListener("submit", searchCityWeather);
+getCityWeather("Madrid");

@@ -1,19 +1,19 @@
 body {
-  background-color: #f5deae;
+  background-color: #efe0c2;
 }
 .content {
-  background-color: white;
+  background-color: #ffffff;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
   margin: 140px auto 30px;
   padding: 10px 20px;
-  border: 3px solid aquamarine;
+  border: 3px solid #37a373;
   border-radius: 25px;
   max-width: 600px;
   box-shadow: 10px 25px 25px rgba(0, 0, 0, 0.2);
 }
 form {
-  margin: 10px 20px;
+  margin: 10px;
   display: flex;
 }
 .currentcity {
@@ -21,15 +21,36 @@ form {
 }
 .currenticon {
   font-size: 80px;
-  color: rgb(255, 69, 0);
+  color: rgb(179, 44, 125);
 }
 .currentweather {
   text-align: left;
 }
 .weatherforecast i {
   font-size: 40px;
-  color: rgba(255, 69, 0, 0.6);
+  color: rgba(179, 44, 125, 0.6);
+}
+#enter-city {
+  border-radius: 10px 0 0 10px;
+  padding: 4px 6px;
+}
+#search-button {
+  padding: 4px 6px;
+  background-color: #37a373;
+  border-color: #1b5037;
+  border-radius: 0 10px 10px 0;
+  color: white;
+  transition: all 200ms ease;
+}
+#search-button:hover {
+  background-color: #bff3db;
+  color: black;
 }
 #github-repository {
-text-align: center;
+  text-align: center;
+  font-family: monospace;
+  color: #37a373;
+}
+#github-link {
+  color: #37a373;
 }
