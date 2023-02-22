@@ -1,4 +1,5 @@
-function displayDay(today) {
+function displayDay(timestamp) {
+  let date = new Date(timestamp);
   let days = [
     "Sunday",
     "Monday",
@@ -8,12 +9,12 @@ function displayDay(today) {
     "Friday",
     "Saturday",
   ];
-  let currentDay = days[today.getDay()];
-  let currentHour = today.getHours();
+  let currentDay = days[date.getDay()];
+  let currentHour = date.getHours();
   if (currentHour < 10) {
     currentHour = `0${currentHour}`;
   }
-  let currentMinutes = today.getMinutes();
+  let currentMinutes = date.getMinutes();
   if (currentMinutes < 10) {
     currentMinutes = `0${currentMinutes}`;
   }
@@ -31,8 +32,6 @@ function displayDay(today) {
   let dayFive = document.querySelector("#day5");
   dayFive.innerHTML = days[(today.getDay() + 5) % days.length];
 }
-
-displayDay(new Date());
 
 function displayTemperature(response) {
   let city = response.data.name;
@@ -52,6 +51,8 @@ function displayTemperature(response) {
   currentTempElement.innerHTML = temperature;
   currentHumidityElement.innerHTML = `Humidity: ${humidity}%`;
   windSpeedElement.innerHTML = `Wind speed: ${windSpeed} km/h`;
+
+  displayDay(response.data.dt * 1000);
 }
 function searchCityWeather(event) {
   event.preventDefault();
