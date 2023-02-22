@@ -49,7 +49,7 @@ function displayTemperature(response) {
 
   currentCityElement.innerHTML = city;
   currentWeatherElement.innerHTML = weather;
-  currentTempElement.innerHTML = `${temperature} °C`;
+  currentTempElement.innerHTML = temperature;
   currentHumidityElement.innerHTML = `Humidity: ${humidity}%`;
   windSpeedElement.innerHTML = `Wind speed: ${windSpeed} km/h`;
 }

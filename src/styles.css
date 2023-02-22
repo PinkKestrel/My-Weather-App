@@ -46,6 +46,22 @@ form {
   background-color: #bff3db;
   color: black;
 }
+#current-city {
+  font-size: 30px;
+}
+#current-temp {
+  font-size: 50px;
+}
+#temp-switch {
+  position: relative;
+  top: -24px;
+}
+#to-celsius {
+  text-decoration: none;
+}
+#to-fahrenheit {
+  text-decoration: none;
+}
 #github-repository {
   text-align: center;
   font-family: monospace;
@@ -53,4 +69,7 @@ form {
 }
 #github-link {
   color: #37a373;
+}
+#github-link:hover {
+  color: #b32c7d;
 }

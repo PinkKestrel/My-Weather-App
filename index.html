@@ -20,8 +20,8 @@
     <title>WeatherApp</title>
   </head>
   <body>
-    <div class="content">
-      <div class="container">
+    <div class="container">
+      <div class="content">
         <div class="row">
           <div class="col-8">
             <form id="city-form" action="/submit">
@@ -46,7 +46,15 @@
             <i class="fa-solid fa-cloud-sun currenticon"></i>
           </div>
           <div class="col-4 currentweather">
-            <div id="current-temp"></div>
+            <span id="current-temp"></span>
+            <span id="temp-switch"
+              ><a href="#" id="to-celsius"> °C</a>|<a
+                href="#"
+                id="to-fahrenheit"
+              >
+                °F</a
+              ></span
+            >
             <div id="current-humidity"></div>
             <div id="wind-speed"></div>
           </div>
