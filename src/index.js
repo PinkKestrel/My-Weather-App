@@ -45,12 +45,19 @@ function displayTemperature(response) {
   let currentTempElement = document.querySelector("#current-temp");
   let currentHumidityElement = document.querySelector("#current-humidity");
   let windSpeedElement = document.querySelector("#wind-speed");
+  let todayIconElement = document.querySelector("#today-icon");
+  let weatherIcon = response.data.weather[0].icon;
 
   currentCityElement.innerHTML = city;
   currentWeatherElement.innerHTML = weather;
   currentTempElement.innerHTML = temperature;
   currentHumidityElement.innerHTML = `Humidity: ${humidity}%`;
   windSpeedElement.innerHTML = `Wind speed: ${windSpeed} km/h`;
+  todayIconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`
+  );
+  todayIconElement.setAttribute("alt", response.data.weather[0].description);
 
   displayDay(response.data.dt * 1000);
 }
