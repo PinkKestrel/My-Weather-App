@@ -35,7 +35,7 @@ function displayDay(timestamp) {
 
 function displayTemperature(response) {
   let city = response.data.name;
-  let weather = response.data.weather[0].main;
+  let weather = response.data.weather[0].description;
   let temperature = Math.round(response.data.main.temp);
   let humidity = response.data.main.humidity;
   let windSpeed = Math.round((response.data.wind.speed / 1000) * 3600);

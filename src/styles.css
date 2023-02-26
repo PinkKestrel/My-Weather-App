@@ -36,6 +36,7 @@ form {
 }
 #search-button {
   padding: 4px 6px;
+  width: 90px;
   background-color: #37a373;
   border-color: #1b5037;
   border-radius: 0 10px 10px 0;
@@ -48,6 +49,9 @@ form {
 }
 #current-city {
   font-size: 30px;
+}
+#current-weather {
+  text-transform: capitalize;
 }
 #current-temp {
   font-size: 50px;
