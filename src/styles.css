@@ -60,12 +60,12 @@ form {
   position: relative;
   top: -24px;
 }
+
+#to-fahrenheit,
 #to-celsius {
   text-decoration: none;
 }
-#to-fahrenheit {
-  text-decoration: none;
-}
+
 #github-repository {
   text-align: center;
   font-family: monospace;
@@ -76,4 +76,11 @@ form {
 }
 #github-link:hover {
   color: #b32c7d;
+}
+.link-selected {
+  color: black;
+  cursor: default;
+}
+.link-selected:hoover {
+  text-decoration: none;
 }

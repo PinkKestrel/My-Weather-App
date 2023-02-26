@@ -40,6 +40,8 @@ function displayTemperature(response) {
   let humidity = response.data.main.humidity;
   let windSpeed = Math.round((response.data.wind.speed / 1000) * 3600);
 
+  celsiusTemperature = response.data.main.temp;
+
   let currentCityElement = document.querySelector("#current-city");
   let currentWeatherElement = document.querySelector("#current-weather");
   let currentTempElement = document.querySelector("#current-temp");
@@ -76,6 +78,32 @@ function getCityWeather(city) {
   axios.get(localWeatherUrl).then(displayTemperature);
 }
 
+function displayFahrenheitTemp(event) {
+  event.preventDefault();
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  let currentTempElement = document.querySelector("#current-temp");
+  currentTempElement.innerHTML = Math.round(fahrenheitTemperature);
+  //let celsiusLink = document.querySelector("#to-celsius");
+  //let fahrenheitLink = document.querySelector("#to-fahrenheit");
+  celsiusLink.classList.remove("link-selected");
+  fahrenheitLink.classList.add("link-selected");
+}
+function displayCelsiusTemp(event) {
+  event.preventDefault();
+  let currentTempElement = document.querySelector("#current-temp");
+  currentTempElement.innerHTML = Math.round(celsiusTemperature);
+  //let celsiusLink = document.querySelector("#to-celsius");
+  //let fahrenheitLink = document.querySelector("#to-fahrenheit");
+  celsiusLink.classList.add("link-selected");
+  fahrenheitLink.classList.remove("link-selected");
+}
+
 let cityForm = document.querySelector("#city-form");
 cityForm.addEventListener("submit", searchCityWeather);
 getCityWeather("Madrid");
+
+let celsiusTemperature = null;
+let celsiusLink = document.querySelector("#to-celsius");
+celsiusLink.addEventListener("click", displayCelsiusTemp);
+let fahrenheitLink = document.querySelector("#to-fahrenheit");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemp);
