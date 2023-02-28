@@ -21,7 +21,26 @@ function displayDay(timestamp) {
   let dayLine = document.querySelector("#current-day");
   dayLine.innerHTML = `${currentDay}, ${currentHour}:${currentMinutes}`;
 
-  let dayOne = document.querySelector("#day1");
+  getWeekdays(date.getDay());
+}
+function getWeekdays(today) {
+  let daysNumber = [1, 2, 3, 4, 5, 6];
+  let daysWeekElement = document.querySelector("#daysWeek");
+  let daysWeekHTML = `<div class="row">`;
+  daysNumber.forEach(function (day) {
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    let newDay = days[today + (day % days.length)];
+    daysWeekHTML =
+      daysWeekHTML +
+      `<div class="col-2">
+          <div> ${newDay} </div>`;
+
+    daysWeekHTML = daysWeekHTML + `</div>`;
+    daysWeekElement.innerHTML = daysWeekHTML;
+    console.log(daysWeekHTML);
+  });
+}
+/*let dayOne = document.querySelector("#day1");
   dayOne.innerHTML = days[(date.getDay() + 1) % days.length].slice(0, 3);
   let dayTwo = document.querySelector("#day2");
   dayTwo.innerHTML = days[(date.getDay() + 2) % days.length].slice(0, 3);
@@ -32,8 +51,8 @@ function displayDay(timestamp) {
   let dayFive = document.querySelector("#day5");
   dayFive.innerHTML = days[(date.getDay() + 5) % days.length].slice(0, 3);
   let daySix = document.querySelector("#day6");
-  daySix.innerHTML = days[(date.getDay() + 6) % days.length].slice(0, 3);
-}
+  daySix.innerHTML = days[(date.getDay() + 6) % days.length].slice(0, 3);*/
+
 function getForecast(coordinates) {
   let apiKey = "3dce9b1c66837262a25b3f448d354a76";
   let weeklyWeatherUrl = `https:api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
