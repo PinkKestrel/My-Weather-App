@@ -22,15 +22,17 @@ function displayDay(timestamp) {
   dayLine.innerHTML = `${currentDay}, ${currentHour}:${currentMinutes}`;
 
   let dayOne = document.querySelector("#day1");
-  dayOne.innerHTML = days[(today.getDay() + 1) % days.length];
+  dayOne.innerHTML = days[(date.getDay() + 1) % days.length].slice(0, 3);
   let dayTwo = document.querySelector("#day2");
-  dayTwo.innerHTML = days[(today.getDay() + 2) % days.length];
+  dayTwo.innerHTML = days[(date.getDay() + 2) % days.length].slice(0, 3);
   let dayThree = document.querySelector("#day3");
-  dayThree.innerHTML = days[(today.getDay() + 3) % days.length];
+  dayThree.innerHTML = days[(date.getDay() + 3) % days.length].slice(0, 3);
   let dayFour = document.querySelector("#day4");
-  dayFour.innerHTML = days[(today.getDay() + 4) % days.length];
+  dayFour.innerHTML = days[(date.getDay() + 4) % days.length].slice(0, 3);
   let dayFive = document.querySelector("#day5");
-  dayFive.innerHTML = days[(today.getDay() + 5) % days.length];
+  dayFive.innerHTML = days[(date.getDay() + 5) % days.length].slice(0, 3);
+  let daySix = document.querySelector("#day6");
+  daySix.innerHTML = days[(date.getDay() + 6) % days.length].slice(0, 3);
 }
 
 function displayTemperature(response) {

@@ -1,6 +1,10 @@
 body {
   background-color: #efe0c2;
 }
+form {
+  margin: 10px;
+  display: flex;
+}
 .content {
   background-color: #ffffff;
   font-family: Arial, Helvetica, sans-serif;
@@ -12,10 +16,6 @@ body {
   max-width: 600px;
   box-shadow: 10px 25px 25px rgba(0, 0, 0, 0.2);
 }
-form {
-  margin: 10px;
-  display: flex;
-}
 .currentcity {
   text-align: right;
 }
@@ -26,9 +26,19 @@ form {
 .currentweather {
   text-align: left;
 }
-.weatherforecast i {
+/*.weatherforecast i {
   font-size: 40px;
   color: rgba(179, 44, 125, 0.6);
+}*/
+.temp-min {
+  opacity: 0.5;
+}
+.link-selected {
+  color: black;
+  cursor: default;
+}
+.link-selected:hoover {
+  text-decoration: none;
 }
 #enter-city {
   border-radius: 10px 0 0 10px;
@@ -76,11 +86,4 @@ form {
 }
 #github-link:hover {
   color: #b32c7d;
-}
-.link-selected {
-  color: black;
-  cursor: default;
-}
-.link-selected:hoover {
-  text-decoration: none;
 }
