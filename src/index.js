@@ -34,8 +34,18 @@ function displayDay(timestamp) {
   let daySix = document.querySelector("#day6");
   daySix.innerHTML = days[(date.getDay() + 6) % days.length].slice(0, 3);
 }
+function getForecast(coordinates) {
+  let apiKey = "3dce9b1c66837262a25b3f448d354a76";
+  let weeklyWeatherUrl = `https:api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  //console.log(weeklyWeatherUrl);
 
-function displayTemperature(response) {
+  axios.get(weeklyWeatherUrl).then(displayWeeklyWeather);
+}
+function displayWeeklyWeather(response) {
+  console.log(response.data);
+}
+function displayWeather(response) {
+  //console.log(response.data);
   let city = response.data.name;
   let weather = response.data.weather[0].description;
   let temperature = Math.round(response.data.main.temp);
@@ -64,6 +74,7 @@ function displayTemperature(response) {
   todayIconElement.setAttribute("alt", response.data.weather[0].description);
 
   displayDay(response.data.dt * 1000);
+  getForecast(response.data.coord);
 }
 function searchCityWeather(event) {
   event.preventDefault();
@@ -77,7 +88,7 @@ function getCityWeather(city) {
   let units = "metric";
   let localWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
 
-  axios.get(localWeatherUrl).then(displayTemperature);
+  axios.get(localWeatherUrl).then(displayWeather);
 }
 
 function displayFahrenheitTemp(event) {
