@@ -29,7 +29,7 @@ function getWeekdays(today) {
   let daysWeekHTML = `<div class="row">`;
   daysNumber.forEach(function (day) {
     let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    let newDay = days[today + (day % days.length)];
+    let newDay = days[(today + day) % days.length];
     daysWeekHTML =
       daysWeekHTML +
       `<div class="col-2">
