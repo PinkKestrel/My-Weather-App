@@ -40,18 +40,6 @@ function getWeekdays(today) {
     console.log(daysWeekHTML);
   });
 }
-/*let dayOne = document.querySelector("#day1");
-  dayOne.innerHTML = days[(date.getDay() + 1) % days.length].slice(0, 3);
-  let dayTwo = document.querySelector("#day2");
-  dayTwo.innerHTML = days[(date.getDay() + 2) % days.length].slice(0, 3);
-  let dayThree = document.querySelector("#day3");
-  dayThree.innerHTML = days[(date.getDay() + 3) % days.length].slice(0, 3);
-  let dayFour = document.querySelector("#day4");
-  dayFour.innerHTML = days[(date.getDay() + 4) % days.length].slice(0, 3);
-  let dayFive = document.querySelector("#day5");
-  dayFive.innerHTML = days[(date.getDay() + 5) % days.length].slice(0, 3);
-  let daySix = document.querySelector("#day6");
-  daySix.innerHTML = days[(date.getDay() + 6) % days.length].slice(0, 3);*/
 
 function getForecast(coordinates) {
   let apiKey = "3dce9b1c66837262a25b3f448d354a76";
@@ -61,8 +49,31 @@ function getForecast(coordinates) {
   axios.get(weeklyWeatherUrl).then(displayWeeklyWeather);
 }
 function displayWeeklyWeather(response) {
-  console.log(response.data);
+  //console.log(response.data);
+  let weekForecastElement = document.querySelector("#weekForecast");
+  let numbers = [1, 2, 3, 4, 5, 6];
+  let weekForecastHTML = `<div class="row">`;
+  numbers.forEach(function (number) {
+    weekForecastHTML =
+      weekForecastHTML +
+      `
+      <div class="col-2">
+        <img
+          src="http://openweathermap.org/img/wn/50d@2x.png"
+          alt=""
+          width="42"
+        />
+        <div class="weather-forecast-temperatures">
+          <span class="temp-max"> 18 </span> <span class="temp-min"> 12 </span>
+        </div>
+      </div>
+  `;
+  });
+  weekForecastHTML = weekForecastHTML + `</div>`;
+  weekForecastElement.innerHTML = weekForecastHTML;
+  console.log(weekForecastHTML);
 }
+
 function displayWeather(response) {
   //console.log(response.data);
   let city = response.data.name;
