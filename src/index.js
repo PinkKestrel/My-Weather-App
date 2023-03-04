@@ -44,12 +44,10 @@ function getWeekdays(today) {
 function getForecast(coordinates) {
   let apiKey = "3dce9b1c66837262a25b3f448d354a76";
   let weeklyWeatherUrl = `https:api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-  //console.log(weeklyWeatherUrl);
 
   axios.get(weeklyWeatherUrl).then(displayWeeklyWeather);
 }
 function displayWeeklyWeather(response) {
-  //console.log(response.data);
   let forecast = response.data.daily;
   let weekForecastElement = document.querySelector("#weekForecast");
   let weekForecastHTML = `<div class="row">`;
@@ -83,7 +81,6 @@ function displayWeeklyWeather(response) {
 }
 
 function displayWeather(response) {
-  //console.log(response.data);
   let city = response.data.name;
   let weather = response.data.weather[0].description;
   let temperature = Math.round(response.data.main.temp);
@@ -129,32 +126,6 @@ function getCityWeather(city) {
   axios.get(localWeatherUrl).then(displayWeather);
 }
 
-function displayFahrenheitTemp(event) {
-  event.preventDefault();
-  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-  let currentTempElement = document.querySelector("#current-temp");
-  currentTempElement.innerHTML = Math.round(fahrenheitTemperature);
-  //let celsiusLink = document.querySelector("#to-celsius");
-  //let fahrenheitLink = document.querySelector("#to-fahrenheit");
-  celsiusLink.classList.remove("link-selected");
-  fahrenheitLink.classList.add("link-selected");
-}
-function displayCelsiusTemp(event) {
-  event.preventDefault();
-  let currentTempElement = document.querySelector("#current-temp");
-  currentTempElement.innerHTML = Math.round(celsiusTemperature);
-  //let celsiusLink = document.querySelector("#to-celsius");
-  //let fahrenheitLink = document.querySelector("#to-fahrenheit");
-  celsiusLink.classList.add("link-selected");
-  fahrenheitLink.classList.remove("link-selected");
-}
-
 let cityForm = document.querySelector("#city-form");
 cityForm.addEventListener("submit", searchCityWeather);
 getCityWeather("Madrid");
-
-let celsiusTemperature = null;
-let celsiusLink = document.querySelector("#to-celsius");
-celsiusLink.addEventListener("click", displayCelsiusTemp);
-let fahrenheitLink = document.querySelector("#to-fahrenheit");
-fahrenheitLink.addEventListener("click", displayFahrenheitTemp);

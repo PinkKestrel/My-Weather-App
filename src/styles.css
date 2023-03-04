@@ -26,10 +26,6 @@ form {
 .currentweather {
   text-align: left;
 }
-/*.weatherforecast i {
-  font-size: 40px;
-  color: rgba(179, 44, 125, 0.6);
-}*/
 .temp-min {
   opacity: 0.5;
 }
@@ -66,16 +62,10 @@ form {
 #current-temp {
   font-size: 50px;
 }
-#temp-switch {
+#temp-celsius {
   position: relative;
-  top: -24px;
+  top: -23px;
 }
-
-#to-fahrenheit,
-#to-celsius {
-  text-decoration: none;
-}
-
 #github-repository {
   text-align: center;
   font-family: monospace;
