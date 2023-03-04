@@ -50,24 +50,32 @@ function getForecast(coordinates) {
 }
 function displayWeeklyWeather(response) {
   //console.log(response.data);
+  let forecast = response.data.daily;
   let weekForecastElement = document.querySelector("#weekForecast");
-  let numbers = [1, 2, 3, 4, 5, 6];
   let weekForecastHTML = `<div class="row">`;
-  numbers.forEach(function (number) {
-    weekForecastHTML =
-      weekForecastHTML +
-      `
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      weekForecastHTML =
+        weekForecastHTML +
+        `
       <div class="col-2">
         <img
-          src="http://openweathermap.org/img/wn/50d@2x.png"
+          src="http://openweathermap.org/img/wn/${
+            forecastDay.weather[0].icon
+          }@2x.png"
           alt=""
-          width="42"
+          width="50"
         />
         <div class="weather-forecast-temperatures">
-          <span class="temp-max"> 18 </span> <span class="temp-min"> 12 </span>
+          <span class="temp-max">${Math.round(
+            forecastDay.temp.max
+          )}°</span> <span class="temp-min"> ${Math.round(
+          forecastDay.temp.min
+        )}°</span>
         </div>
       </div>
   `;
+    }
   });
   weekForecastHTML = weekForecastHTML + `</div>`;
   weekForecastElement.innerHTML = weekForecastHTML;
