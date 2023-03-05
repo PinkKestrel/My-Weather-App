@@ -37,7 +37,6 @@ function getWeekdays(today) {
 
     daysWeekHTML = daysWeekHTML + `</div>`;
     daysWeekElement.innerHTML = daysWeekHTML;
-    console.log(daysWeekHTML);
   });
 }
 
@@ -77,7 +76,6 @@ function displayWeeklyWeather(response) {
   });
   weekForecastHTML = weekForecastHTML + `</div>`;
   weekForecastElement.innerHTML = weekForecastHTML;
-  console.log(weekForecastHTML);
 }
 
 function displayWeather(response) {
