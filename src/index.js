@@ -1,55 +1,62 @@
+const DAYS = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+
+const API_KEY = "cfdtb229644obe0a8ca750dd05413af0";
+
 function displayDay(timestamp) {
-  let date = new Date(timestamp * 1000);
-  let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  let currentDay = days[date.getDay()];
+  const date = new Date(timestamp * 1000);
+  const currentDay = DAYS[date.getDay()];
+
   let currentHour = date.getHours();
   if (currentHour < 10) {
     currentHour = `0${currentHour}`;
   }
+
   let currentMinutes = date.getMinutes();
   if (currentMinutes < 10) {
     currentMinutes = `0${currentMinutes}`;
   }
-  let dayLine = document.querySelector("#current-day");
+
+  const dayLine = document.querySelector("#current-day");
   dayLine.innerHTML = `${currentDay}, ${currentHour}:${currentMinutes}`;
 
-  getWeekdays(date.getDay());
+  displayWeekdays(date.getDay());
 }
-function getWeekdays(today) {
-  let daysNumber = [1, 2, 3, 4, 5, 6];
-  let daysWeekElement = document.querySelector("#daysWeek");
+
+function displayWeekdays(today) {
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const daysNumber = [1, 2, 3, 4, 5, 6];
+  const daysWeekElement = document.querySelector("#daysWeek");
+
   let daysWeekHTML = `<div class="row">`;
   daysNumber.forEach(function (day) {
-    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    let newDay = days[(today + day) % days.length];
+    const newDay = days[(today + day) % days.length];
     daysWeekHTML =
       daysWeekHTML +
       `<div class="col-2">
-          <div> ${newDay} </div>`;
-
-    daysWeekHTML = daysWeekHTML + `</div>`;
-    daysWeekElement.innerHTML = daysWeekHTML;
+          <div> ${newDay} </div>
+       </div>`;
   });
+
+  daysWeekElement.innerHTML = daysWeekHTML;
 }
 
-function getForecast(coordinates) {
-  let apiKey = "cfdtb229644obe0a8ca750dd05413af0";
-  let weeklyWeatherUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
-  console.log(weeklyWeatherUrl);
+function getAndDisplayForecast(coordinates) {
+  const weeklyWeatherUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${API_KEY}&units=metric`;
 
   axios.get(weeklyWeatherUrl).then(displayWeeklyWeather);
 }
+
 function displayWeeklyWeather(response) {
-  let forecast = response.data.daily;
-  let weekForecastElement = document.querySelector("#weekForecast");
+  const forecast = response.data.daily;
+  const weekForecastElement = document.querySelector("#weekForecast");
   let weekForecastHTML = `<div class="row">`;
   forecast.forEach(function (forecastDay, index) {
     if (index < 6) {
@@ -75,26 +82,24 @@ function displayWeeklyWeather(response) {
   `;
     }
   });
-  weekForecastHTML = weekForecastHTML + `</div>`;
+  weekForecastHTML += `</div>`;
   weekForecastElement.innerHTML = weekForecastHTML;
 }
 
 function displayWeather(response) {
-  let city = response.data.city;
-  let weather = response.data.condition.description;
-  let temperature = Math.round(response.data.temperature.current);
-  let humidity = response.data.temperature.humidity;
-  let windSpeed = Math.round((response.data.wind.speed / 1000) * 3600);
+  const city = response.data.city;
+  const weather = response.data.condition.description;
+  const temperature = Math.round(response.data.temperature.current);
+  const humidity = response.data.temperature.humidity;
+  const windSpeed = Math.round((response.data.wind.speed / 1000) * 3600);
 
-  celsiusTemperature = response.data.temperature.current;
-
-  let currentCityElement = document.querySelector("#current-city");
-  let currentWeatherElement = document.querySelector("#current-weather");
-  let currentTempElement = document.querySelector("#current-temp");
-  let currentHumidityElement = document.querySelector("#current-humidity");
-  let windSpeedElement = document.querySelector("#wind-speed");
-  let todayIconElement = document.querySelector("#today-icon");
-  let weatherIcon = response.data.condition.icon;
+  const currentCityElement = document.querySelector("#current-city");
+  const currentWeatherElement = document.querySelector("#current-weather");
+  const currentTempElement = document.querySelector("#current-temp");
+  const currentHumidityElement = document.querySelector("#current-humidity");
+  const windSpeedElement = document.querySelector("#wind-speed");
+  const todayIconElement = document.querySelector("#today-icon");
+  const weatherIcon = response.data.condition.icon;
 
   currentCityElement.innerHTML = city;
   currentWeatherElement.innerHTML = weather;
@@ -108,23 +113,22 @@ function displayWeather(response) {
   todayIconElement.setAttribute("alt", response.data.condition.icon);
 
   displayDay(response.data.time);
-  getForecast(response.data.coordinates);
-}
-function searchCityWeather(event) {
-  event.preventDefault();
-  let cityInput = document.querySelector("#enter-city");
-  let searchCity = cityInput.value;
-  getCityWeather(searchCity);
+  getAndDisplayForecast(response.data.coordinates);
 }
 
-function getCityWeather(city) {
-  let apiKey = "cfdtb229644obe0a8ca750dd05413af0";
-  let units = "metric";
-  let localWeatherUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=${units}`;
+function searchCityWeather(event) {
+  event.preventDefault();
+  const cityInput = document.querySelector("#enter-city");
+  const searchCity = cityInput.value;
+  getAndDisplayCityWeather(searchCity);
+}
+
+function getAndDisplayCityWeather(city) {
+  const localWeatherUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${API_KEY}&units=metric`;
 
   axios.get(localWeatherUrl).then(displayWeather);
 }
 
-let cityForm = document.querySelector("#city-form");
+const cityForm = document.querySelector("#city-form");
 cityForm.addEventListener("submit", searchCityWeather);
-getCityWeather("Madrid");
+getAndDisplayCityWeather("Madrid");

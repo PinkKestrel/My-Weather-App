@@ -1,10 +1,12 @@
 body {
   background-color: #efe0c2;
 }
+
 form {
   margin: 10px;
   display: flex;
 }
+
 .content {
   background-color: #ffffff;
   font-family: Arial, Helvetica, sans-serif;
@@ -16,30 +18,38 @@ form {
   max-width: 600px;
   box-shadow: 10px 25px 25px rgba(0, 0, 0, 0.2);
 }
+
 .currentcity {
   text-align: right;
 }
+
 .currenticon {
   font-size: 80px;
   color: rgb(179, 44, 125);
 }
+
 .currentweather {
   text-align: left;
 }
+
 .temp-min {
   opacity: 0.5;
 }
+
 .link-selected {
   color: black;
   cursor: default;
 }
+
 .link-selected:hoover {
   text-decoration: none;
 }
+
 #enter-city {
   border-radius: 10px 0 0 10px;
   padding: 4px 6px;
 }
+
 #search-button {
   padding: 4px 6px;
   width: 90px;
@@ -49,31 +59,39 @@ form {
   color: white;
   transition: all 200ms ease;
 }
+
 #search-button:hover {
   background-color: #bff3db;
   color: black;
 }
+
 #current-city {
   font-size: 30px;
 }
+
 #current-weather {
   text-transform: capitalize;
 }
+
 #current-temp {
   font-size: 50px;
 }
+
 #temp-celsius {
   position: relative;
   top: -23px;
 }
+
 #github-repository {
   text-align: center;
   font-family: monospace;
   color: #37a373;
 }
+
 #github-link {
   color: #37a373;
 }
+
 #github-link:hover {
   color: #b32c7d;
 }
