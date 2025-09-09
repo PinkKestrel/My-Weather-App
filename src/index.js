@@ -1,5 +1,5 @@
 function displayDay(timestamp) {
-  let date = new Date(timestamp);
+  let date = new Date(timestamp * 1000);
   let days = [
     "Sunday",
     "Monday",
@@ -41,8 +41,9 @@ function getWeekdays(today) {
 }
 
 function getForecast(coordinates) {
-  let apiKey = "3dce9b1c66837262a25b3f448d354a76";
-  let weeklyWeatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  let apiKey = "cfdtb229644obe0a8ca750dd05413af0";
+  let weeklyWeatherUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
+  console.log(weeklyWeatherUrl);
 
   axios.get(weeklyWeatherUrl).then(displayWeeklyWeather);
 }
@@ -56,18 +57,18 @@ function displayWeeklyWeather(response) {
         weekForecastHTML +
         `
       <div class="col-2">
-        <img
-          src="https://openweathermap.org/img/wn/${
-            forecastDay.weather[0].icon
-          }@2x.png"
+      <img
+          src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
+            forecastDay.condition.icon
+          }.png"
           alt=""
           width="50"
         />
         <div class="weather-forecast-temperatures">
           <span class="temp-max">${Math.round(
-            forecastDay.temp.max
+            forecastDay.temperature.maximum
           )}°</span> <span class="temp-min"> ${Math.round(
-          forecastDay.temp.min
+          forecastDay.temperature.minimum
         )}°</span>
         </div>
       </div>
@@ -79,13 +80,13 @@ function displayWeeklyWeather(response) {
 }
 
 function displayWeather(response) {
-  let city = response.data.name;
-  let weather = response.data.weather[0].description;
-  let temperature = Math.round(response.data.main.temp);
-  let humidity = response.data.main.humidity;
+  let city = response.data.city;
+  let weather = response.data.condition.description;
+  let temperature = Math.round(response.data.temperature.current);
+  let humidity = response.data.temperature.humidity;
   let windSpeed = Math.round((response.data.wind.speed / 1000) * 3600);
 
-  celsiusTemperature = response.data.main.temp;
+  celsiusTemperature = response.data.temperature.current;
 
   let currentCityElement = document.querySelector("#current-city");
   let currentWeatherElement = document.querySelector("#current-weather");
@@ -93,7 +94,7 @@ function displayWeather(response) {
   let currentHumidityElement = document.querySelector("#current-humidity");
   let windSpeedElement = document.querySelector("#wind-speed");
   let todayIconElement = document.querySelector("#today-icon");
-  let weatherIcon = response.data.weather[0].icon;
+  let weatherIcon = response.data.condition.icon;
 
   currentCityElement.innerHTML = city;
   currentWeatherElement.innerHTML = weather;
@@ -102,12 +103,12 @@ function displayWeather(response) {
   windSpeedElement.innerHTML = `Wind speed: ${windSpeed} km/h`;
   todayIconElement.setAttribute(
     "src",
-    `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`
+    `https://shecodes-assets.s3.amazonaws.com/api/weather/icons/${weatherIcon}.png`
   );
-  todayIconElement.setAttribute("alt", response.data.weather[0].description);
+  todayIconElement.setAttribute("alt", response.data.condition.icon);
 
-  displayDay(response.data.dt * 1000);
-  getForecast(response.data.coord);
+  displayDay(response.data.time);
+  getForecast(response.data.coordinates);
 }
 function searchCityWeather(event) {
   event.preventDefault();
@@ -117,9 +118,9 @@ function searchCityWeather(event) {
 }
 
 function getCityWeather(city) {
-  let apiKey = "3dce9b1c66837262a25b3f448d354a76";
+  let apiKey = "cfdtb229644obe0a8ca750dd05413af0";
   let units = "metric";
-  let localWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+  let localWeatherUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=${units}`;
 
   axios.get(localWeatherUrl).then(displayWeather);
 }
